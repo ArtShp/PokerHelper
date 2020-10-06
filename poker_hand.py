@@ -8,6 +8,10 @@ class PokerHand(object):
         self.hand = hand.split()
         self.highcard_exception = ''
         self._sort_hand()
+        self._count_value()
+
+    def _get_points(self):
+        return self.points
 
     def show_hand(self):
         print(self.hand)
@@ -82,7 +86,7 @@ class PokerHand(object):
                             self.highcard_exception = self.values.index(self.hand[4][0])
 
     def compare_with(self, other):
-        pts1, pts2 = self.points, other.points
+        pts1, pts2 = self.points, other._get_points()
         hce1, hce2 = self.highcard_exception, other.highcard_exception
         if pts1 == pts2 == 1:
             if hce1 > hce2:
