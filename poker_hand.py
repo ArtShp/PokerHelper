@@ -6,6 +6,7 @@ class PokerHand(object):
 
     def __init__(self, hand):
         self.hand = hand.split()
+        self.highcard_exception = ''
         self._sort_hand()
 
     def show_hand(self):
@@ -81,4 +82,5 @@ class PokerHand(object):
                             self.highcard_exception = self.hand[4][0]
 
     def compare_with(self, other):
-        pass
+        pts1, pts2 = self.points, other.points
+
