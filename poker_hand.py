@@ -30,12 +30,12 @@ class PokerHand(object):
     def _count_value(self):
         self.points = 0
 
-        if (('T' in [self.hand[0][0], self.hand[1][0], self.hand[2][0], self.hand[3][0], self.hand[4][0]]) and (
-                'J' in [self.hand[0][0], self.hand[1][0], self.hand[2][0], self.hand[3][0], self.hand[4][0]]) and (
-                    'Q' in [self.hand[0][0], self.hand[1][0], self.hand[2][0], self.hand[3][0], self.hand[4][0]]) and (
-                    'K' in [self.hand[0][0], self.hand[1][0], self.hand[2][0], self.hand[3][0], self.hand[4][0]]) and (
-                    'A' in [self.hand[0][0], self.hand[1][0], self.hand[2][0], self.hand[3][0], self.hand[4][0]])) and (
-                self.hand[0][1] == self.hand[1][1] == self.hand[2][1] == self.hand[3][1] == self.hand[4][1]):
+        if 'T' == self.hand[0][0] and \
+                'J' == self.hand[1][0] and \
+                'Q' == self.hand[2][0] and \
+                'K' == self.hand[3][0] and \
+                'A' == self.hand[4][0] and \
+                self.hand[0][1] == self.hand[1][1] == self.hand[2][1] == self.hand[3][1] == self.hand[4][1]:
             self.points = 10
 
     def compare_with(self, other):
