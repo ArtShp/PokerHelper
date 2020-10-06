@@ -3,7 +3,6 @@ from copy import deepcopy
 class PokerHand(object):
     RESULT = ["Loss", "Tie", "Win"]
     values = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
-    suits = ['S', 'H', 'D', 'C']
 
     def __init__(self, hand):
         self.hand = hand.split()
@@ -29,7 +28,6 @@ class PokerHand(object):
 
     def _count_value(self):
         self.points = 0
-
         if 'T' == self.hand[0][0] and \
                 'J' == self.hand[1][0] and \
                 'Q' == self.hand[2][0] and \
@@ -37,6 +35,50 @@ class PokerHand(object):
                 'A' == self.hand[4][0] and \
                 self.hand[0][1] == self.hand[1][1] == self.hand[2][1] == self.hand[3][1] == self.hand[4][1]:
             self.points = 10
+        else:
+            for i in range(9):
+                if self.values[i] == self.hand[0][0] and \
+                        self.values[i+1] == self.hand[1][0] and \
+                        self.values[i+2] == self.hand[2][0] and \
+                        self.values[i+3] == self.hand[3][0] and \
+                        self.values[i+4] == self.hand[4][0] and \
+                        self.hand[0][1] == self.hand[1][1] == self.hand[2][1] == self.hand[3][1] == self.hand[4][1]:
+                    self.points = 9
+                    break
+            if self.points == 0:
+                if self.hand[0][0] == self.hand[1][0] == self.hand[2][0] == self.hand[3][0] or \
+                        self.hand[1][0] == self.hand[2][0] == self.hand[3][0] == self.hand[4][0]:
+                    self.points = 8
+                elif self.hand[0][0] == self.hand[1][0] == self.hand[2][0] and self.hand[3][0] == self.hand[4][0]:
+                    self.points = 7
+                elif self.hand[0][1] == self.hand[1][1] == self.hand[2][1] == self.hand[3][1] == self.hand[4][1]:
+                    self.points = 6
+                else:
+                    for i in range(9):
+                        if self.values[i] == self.hand[0][0] and \
+                                self.values[i+1] == self.hand[1][0] and \
+                                self.values[i+2] == self.hand[2][0] and \
+                                self.values[i+3] == self.hand[3][0] and \
+                                self.values[i+4] == self.hand[4][0]:
+                            self.points = 5
+                            break
+                    if self.points == 0:
+                        if self.hand[0][0] == self.hand[1][0] == self.hand[2][0] and \
+                                self.hand[1][0] == self.hand[2][0] == self.hand[3][0] and \
+                                self.hand[2][0] == self.hand[3][0] == self.hand[4][0]:
+                            self.points = 4
+                        elif (self.hand[0][0] == self.hand[1][0] and self.hand[2][0] == self.hand[3][0]) or \
+                                (self.hand[0][0] == self.hand[1][0] and self.hand[3][0] == self.hand[4][0]) or \
+                                (self.hand[1][0] == self.hand[2][0] and self.hand[3][0] == self.hand[4][0]):
+                            self.points = 3
+                        elif self.hand[0][0] == self.hand[1][0] or \
+                                self.hand[1][0] == self.hand[2][0] or \
+                                self.hand[2][0] == self.hand[3][0] or \
+                                self.hand[3][0] == self.hand[4][0]:
+                            self.points = 2
+                        else:
+                            self.points = 1
+                            self.highcard_exception = self.hand[4][0]
 
     def compare_with(self, other):
         pass
