@@ -1,7 +1,7 @@
 from copy import deepcopy
 
 class PokerHand(object):
-    RESULT = ["Loss", "Tie", "Win"]
+    RESULT = ["Win", "Tie", "Loss"]
     values = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 
     def __init__(self, hand):
@@ -79,8 +79,22 @@ class PokerHand(object):
                             self.points = 2
                         else:
                             self.points = 1
-                            self.highcard_exception = self.hand[4][0]
+                            self.highcard_exception = self.values.index(self.hand[4][0])
 
     def compare_with(self, other):
         pts1, pts2 = self.points, other.points
+        hce1, hce2 = self.highcard_exception, other.highcard_exception
+        if pts1 == pts2 == 1:
+            if hce1 > hce2:
+                return self.RESULT[0]
+            elif hce1 == hce2:
+                return self.RESULT[1]
+            else:
+                return self.RESULT[2]
 
+        if pts1 > pts2:
+            return self.RESULT[0]
+        elif pts1 == pts2:
+            return self.RESULT[1]
+        else:
+            return self.RESULT[2]
