@@ -69,8 +69,8 @@ class PokerHand(object):
                             self.points = 5
                             break
                     if self.points == 0:
-                        if self.hand[0][0] == self.hand[1][0] == self.hand[2][0] and \
-                                self.hand[1][0] == self.hand[2][0] == self.hand[3][0] and \
+                        if self.hand[0][0] == self.hand[1][0] == self.hand[2][0] or \
+                                self.hand[1][0] == self.hand[2][0] == self.hand[3][0] or \
                                 self.hand[2][0] == self.hand[3][0] == self.hand[4][0]:
                             self.points = 4
                         elif (self.hand[0][0] == self.hand[1][0] and self.hand[2][0] == self.hand[3][0]) or \
