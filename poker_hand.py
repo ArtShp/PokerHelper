@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 class PokerHand(object):
     RESULT = ["Win", "Tie", "Loss"]
     values = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
@@ -13,12 +11,8 @@ class PokerHand(object):
     def _get_points(self):
         return self.points
 
-    def show_hand(self):
-        print(self.hand)
-
     def _sort_hand(self):
-        hand = deepcopy(self.hand)
-        arr_i = [hand[0][0], hand[1][0], hand[2][0], hand[3][0], hand[4][0]]
+        arr_i = [self.hand[0][0], self.hand[1][0], self.hand[2][0], self.hand[3][0], self.hand[4][0]]
         arr = []
         for i in range(5):
             arr.append(self.values.index(arr_i[i]))
@@ -26,8 +20,8 @@ class PokerHand(object):
         arr = [self.values[arr[0]], self.values[arr[1]], self.values[arr[2]], self.values[arr[3]], self.values[arr[4]]]
         fin_arr = []
         for i in range(5):
-            fin_arr.append(hand[int(arr_i.index(arr[i]))])
-            hand.remove(hand[int(arr_i.index(arr[i]))])
+            fin_arr.append(self.hand[int(arr_i.index(arr[i]))])
+            self.hand.remove(self.hand[int(arr_i.index(arr[i]))])
             arr_i.remove(arr[i])
         self.hand = fin_arr
 
